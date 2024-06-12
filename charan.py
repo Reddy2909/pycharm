@@ -1,49 +1,28 @@
-def add(x, y):
-    return x + y
+import streamlit as st
 
-def subtract(x, y):
-    return x - y
+# Title of the app
+st.title("Simple Calculator")
 
-def multiply(x, y):
-    return x * y
+# Input numbers
+num1 = st.number_input("Enter first number", value=0.0)
+num2 = st.number_input("Enter second number", value=0.0)
 
-def divide(x, y):
-    if y == 0:
-        return "Error! Division by zero."
+# Operation selection
+operation = st.selectbox("Select operation", ["Add", "Subtract", "Multiply", "Divide"])
+
+# Perform the calculation
+if operation == "Add":
+    result = num1 + num2
+elif operation == "Subtract":
+    result = num1 - num2
+elif operation == "Multiply":
+    result = num1 * num2
+elif operation == "Divide":
+    if num2 != 0:
+        result = num1 / num2
     else:
-        return x / y
+        result = "Error! Division by zero."
 
-def calculator():
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+# Display the result
+st.write("Result:", result)
 
-    while True:
-        choice = input("Enter choice(1/2/3/4): ")
-
-        if choice in ['1', '2', '3', '4']:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-
-            if choice == '1':
-                print(f"The result is: {add(num1, num2)}")
-
-            elif choice == '2':
-                print(f"The result is: {subtract(num1, num2)}")
-
-            elif choice == '3':
-                print(f"The result is: {multiply(num1, num2)}")
-
-            elif choice == '4':
-                print(f"The result is: {divide(num1, num2)}")
-
-            next_calculation = input("Do you want to perform another calculation? (yes/no): ")
-            if next_calculation.lower() != 'yes':
-                break
-        else:
-            print("Invalid input")
-
-if __name__ == "__main__":
-    calculator()
